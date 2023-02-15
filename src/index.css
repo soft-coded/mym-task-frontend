@@ -15,4 +15,12 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: black;
+	color: white;
+}
+
+.container {
+	max-width: 1100px;
+	padding: 0 20px;
+	margin: auto;
 }
