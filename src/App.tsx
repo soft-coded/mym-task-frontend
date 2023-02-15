@@ -1,7 +1,12 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 
-function App() {
-	return <div>Hello world</div>;
+import Router from "./components/Router";
+
+export default function App() {
+	return (
+		<BrowserRouter>
+			<Router />
+		</BrowserRouter>
+	);
 }
-
-export default App;
