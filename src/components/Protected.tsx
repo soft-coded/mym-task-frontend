@@ -1,13 +1,15 @@
 import { Navigate } from "react-router-dom";
 
-const isLoggedIn = false;
+import { useAppSelector } from "../store";
 
 export default function Protected({
 	children
 }: {
 	children: React.ReactElement;
 }) {
-	if (!isLoggedIn) {
+	const isAuthed = useAppSelector(state => state.auth.isAuthed);
+
+	if (!isAuthed) {
 		return <Navigate to="/login" replace />;
 	}
 
