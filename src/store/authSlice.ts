@@ -69,13 +69,16 @@ const authSlice = createSlice({
 			state.status = "idle";
 		},
 
-		// for oauth
 		login(state, action) {
 			state.email = action.payload.email;
 			state.token = action.payload.token;
 			state.isAuthed = true;
 			state.status = "idle";
 			state.error = "";
+			saveToLocalStorage({
+				email: action.payload.email,
+				token: action.payload.token
+			});
 		},
 
 		logout(state) {
@@ -85,63 +88,48 @@ const authSlice = createSlice({
 			state.error = "";
 			state.status = "idle";
 			removeFromLocalStorage();
+		},
+
+		throwError(state, action: any) {
+			state.isAuthed = false;
+			state.email = "";
+			state.token = "";
+			state.status = "idle";
+			state.error = action.error.message;
+		},
+
+		pendingState(state) {
+			state.isAuthed = false;
+			state.email = "";
+			state.token = "";
+			state.status = "loading";
+			state.error = "";
 		}
 	},
+
 	extraReducers: builder => {
 		builder.addCase(loginThunk.fulfilled, (state, action) => {
-			state.isAuthed = true;
-			state.email = action.payload.email!;
-			state.token = action.payload.token;
-			state.status = "idle";
-			state.error = "";
-			saveToLocalStorage({
-				email: action.payload.email!,
-				token: action.payload.token
-			});
+			authSlice.caseReducers.login(state, action);
 		});
 
 		builder.addCase(loginThunk.rejected, (state, action) => {
-			state.isAuthed = false;
-			state.email = "";
-			state.token = "";
-			state.status = "idle";
-			state.error = action.error.message!;
+			authSlice.caseReducers.throwError(state, action);
 		});
 
-		builder.addCase(loginThunk.pending, (state, action) => {
-			state.isAuthed = false;
-			state.email = "";
-			state.token = "";
-			state.status = "loading";
-			state.error = "";
+		builder.addCase(loginThunk.pending, state => {
+			authSlice.caseReducers.pendingState(state);
 		});
 
 		builder.addCase(signupThunk.fulfilled, (state, action) => {
-			state.isAuthed = true;
-			state.email = action.payload.email!;
-			state.token = action.payload.token;
-			state.status = "idle";
-			state.error = "";
-			saveToLocalStorage({
-				email: action.payload.email!,
-				token: action.payload.token
-			});
+			authSlice.caseReducers.login(state, action);
 		});
 
 		builder.addCase(signupThunk.rejected, (state, action) => {
-			state.isAuthed = false;
-			state.email = "";
-			state.token = "";
-			state.status = "idle";
-			state.error = action.error.message!;
+			authSlice.caseReducers.throwError(state, action);
 		});
 
-		builder.addCase(signupThunk.pending, (state, action) => {
-			state.isAuthed = false;
-			state.email = "";
-			state.token = "";
-			state.status = "loading";
-			state.error = "";
+		builder.addCase(signupThunk.pending, state => {
+			authSlice.caseReducers.pendingState(state);
 		});
 	}
 });
