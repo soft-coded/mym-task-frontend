@@ -60,7 +60,7 @@ export default function SignupPage() {
 							disabled={authStatus !== "idle"}
 							onClick={handleSignUp}
 						>
-							SIGN UP
+							{authStatus === "loading" ? "SIGNING UP..." : "SIGN UP"}
 						</button>
 					</div>
 					<div className="separator-or flex items-center justify-center font-semibold">

@@ -54,7 +54,7 @@ export default function LoginPage() {
 							onClick={handleLogIn}
 							disabled={authStatus !== "idle"}
 						>
-							LOG IN
+							{authStatus === "loading" ? "LOGGING IN..." : "LOG IN"}
 						</button>
 					</div>
 					<div className="separator-or flex items-center justify-center font-semibold">
