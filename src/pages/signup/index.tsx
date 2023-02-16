@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../store";
 import { signupThunk } from "../../store/authSlice";
-import "./signup.css";
+import GoogleAuth from "../../components/GoogleAuth";
 
 export default function SignupPage() {
 	const dispatch = useAppDispatch();
@@ -63,6 +63,10 @@ export default function SignupPage() {
 							SIGN UP
 						</button>
 					</div>
+					<div className="separator-or flex items-center justify-center font-semibold">
+						<h5>OR</h5>
+					</div>
+					<GoogleAuth authType="Sign up" />
 					<div className="form-group">
 						<div className="info text-center">
 							Have an account?{" "}

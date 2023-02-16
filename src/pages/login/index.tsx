@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../store";
 import { loginThunk } from "../../store/authSlice";
+import GoogleAuth from "../../components/GoogleAuth";
 
 export default function LoginPage() {
 	const dispatch = useAppDispatch();
@@ -56,6 +57,10 @@ export default function LoginPage() {
 							LOG IN
 						</button>
 					</div>
+					<div className="separator-or flex items-center justify-center font-semibold">
+						<h5>OR</h5>
+					</div>
+					<GoogleAuth authType="Log in" />
 					<div className="form-group">
 						<div className="info text-center">
 							Don't have an account?{" "}

@@ -100,3 +100,11 @@ form .link {
 .image-card {
 	background-color: rgb(64, 64, 64);
 }
+
+.google-auth {
+	background: rgb(82, 82, 82);
+	font-weight: 600;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
