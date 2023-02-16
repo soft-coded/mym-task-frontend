@@ -38,7 +38,7 @@ export default function LoginPage() {
 			<div className="container">
 				<h1 className="text-center">LOG IN</h1>
 				<form>
-					{error && <div className="form-group">{error}</div>}
+					{error && <div className="form-group error">{error}</div>}
 					<div className="form-group">
 						<label htmlFor="email">Email</label>
 						<input ref={emailRef} type="email" id="email" required />
