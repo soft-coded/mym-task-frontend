@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../store";
 import { loginThunk } from "../../store/authSlice";
@@ -7,6 +7,7 @@ import "./login.css";
 
 export default function LoginPage() {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const { status: authStatus, error } = useAppSelector(state => state.auth);
 	// using uncontrolled components to save time
 	const emailRef = useRef<HTMLInputElement>(null);
@@ -18,14 +19,18 @@ export default function LoginPage() {
 		e.preventDefault();
 		if (!emailRef.current || !passwordRef.current) return;
 
-		const res = await dispatch(
-			loginThunk({
-				email: emailRef.current.value!,
-				password: passwordRef.current.value
-			})
-		).unwrap();
-
-		console.log("in handleLogIn", res);
+		try {
+			await dispatch(
+				loginThunk({
+					email: emailRef.current.value!,
+					password: passwordRef.current.value
+				})
+			).unwrap();
+			// only redirect on a successful login
+			navigate("/");
+		} catch (err) {
+			// do nothing, redux automatically takes care of this
+		}
 	}
 
 	return (
