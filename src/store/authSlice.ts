@@ -42,12 +42,23 @@ const initialState: InitState = {
 	error: ""
 };
 
+const USER_DATA_KEY = "userData";
+
+function saveToLocalStorage(userData: { email: string; token: string }) {
+	const userDataString = JSON.stringify(userData);
+	localStorage.setItem(USER_DATA_KEY, userDataString);
+}
+
+function removeFromLocalStorage() {
+	localStorage.removeItem(USER_DATA_KEY);
+}
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState,
 	reducers: {
 		loginOnLoad(state) {
-			const userDataString = localStorage.getItem("userData");
+			const userDataString = localStorage.getItem(USER_DATA_KEY);
 			if (userDataString) {
 				const userData = JSON.parse(userDataString);
 				state.email = userData.email;
@@ -56,6 +67,15 @@ const authSlice = createSlice({
 				state.error = "";
 			}
 			state.status = "idle";
+		},
+
+		logout(state) {
+			state.isAuthed = false;
+			state.email = "";
+			state.token = "";
+			state.error = "";
+			state.status = "idle";
+			removeFromLocalStorage();
 		}
 	},
 	extraReducers: builder => {
@@ -65,6 +85,10 @@ const authSlice = createSlice({
 			state.token = action.payload.token;
 			state.status = "idle";
 			state.error = "";
+			saveToLocalStorage({
+				email: action.payload.email!,
+				token: action.payload.token
+			});
 		});
 
 		builder.addCase(loginThunk.rejected, (state, action) => {
@@ -89,10 +113,13 @@ const authSlice = createSlice({
 			state.token = action.payload.token;
 			state.status = "idle";
 			state.error = "";
+			saveToLocalStorage({
+				email: action.payload.email!,
+				token: action.payload.token
+			});
 		});
 
 		builder.addCase(signupThunk.rejected, (state, action) => {
-			console.log("in signupThunk.rejected", action);
 			state.isAuthed = false;
 			state.email = "";
 			state.token = "";
