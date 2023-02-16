@@ -7,6 +7,7 @@ import HomePage from "../pages/home";
 import SignupPage from "../pages/signup";
 import LoginPage from "../pages/login";
 import Protected from "./Protected";
+import OAuthRedirector from "./OAuthRedirector";
 
 export default function Router() {
 	const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ export default function Router() {
 		<Routes>
 			<Route path="/login" element={<LoginPage />} />
 			<Route path="/signup" element={<SignupPage />} />
+			<Route path="/oauth" element={<OAuthRedirector />} />
 			<Route
 				path="/"
 				element={

@@ -69,6 +69,15 @@ const authSlice = createSlice({
 			state.status = "idle";
 		},
 
+		// for oauth
+		login(state, action) {
+			state.email = action.payload.email;
+			state.token = action.payload.token;
+			state.isAuthed = true;
+			state.status = "idle";
+			state.error = "";
+		},
+
 		logout(state) {
 			state.isAuthed = false;
 			state.email = "";
