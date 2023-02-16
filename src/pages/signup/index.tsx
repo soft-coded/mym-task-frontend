@@ -20,6 +20,7 @@ export default function SignupPage() {
 		e.preventDefault();
 		if (!emailRef.current || !passwordRef.current || !nameRef.current) return;
 
+		// skipping form validation to save time, kindly input the correct values :)
 		try {
 			await dispatch(
 				signupThunk({

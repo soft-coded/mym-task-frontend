@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../store";
 import { loginThunk } from "../../store/authSlice";
-import "./login.css";
 
 export default function LoginPage() {
 	const dispatch = useAppDispatch();
@@ -19,6 +18,7 @@ export default function LoginPage() {
 		e.preventDefault();
 		if (!emailRef.current || !passwordRef.current) return;
 
+		// skipping form validation to save time, kindly input the correct values :)
 		try {
 			await dispatch(
 				loginThunk({

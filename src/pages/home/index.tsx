@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../store";
-import "./home.css";
 import { NasaApiData } from "../../types";
 import { getImage } from "../../api/image";
 import { authActions } from "../../store/authSlice";
