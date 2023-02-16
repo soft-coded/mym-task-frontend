@@ -2,7 +2,8 @@
  * Under normal circumstances, this file would be a .env file. But since it does not matter for this app, I am using a normal ts file to define all the environment variables.
  */
 
-export const SERVER_ORIGIN = "http://localhost:5000";
+// export const SERVER_ORIGIN = "http://localhost:5000";
+export const SERVER_ORIGIN = "https://mym-task-backend.onrender.com";
 
 export const GOOGLE_OAUTH_CREDENTIALS = {
 	client_id:
