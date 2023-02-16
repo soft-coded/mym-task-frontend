@@ -1,3 +1,5 @@
+/* Using a single CSS file for the whole app to save time. Normally, I would use a different file for each page/component. */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
