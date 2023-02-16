@@ -64,8 +64,16 @@ form button[type="submit"] {
 	align-self: center;
 	padding: 10px;
 	border-radius: 5px;
+	cursor: pointer;
 }
 
 form .link {
 	color: rgb(119, 119, 245);
+}
+
+form .error {
+	color: red;
+	text-align: center;
+	font-size: 1.5vw;
+	font-weight: 600;
 }

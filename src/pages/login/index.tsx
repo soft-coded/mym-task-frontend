@@ -18,12 +18,14 @@ export default function LoginPage() {
 		e.preventDefault();
 		if (!emailRef.current || !passwordRef.current) return;
 
-		await dispatch(
+		const res = await dispatch(
 			loginThunk({
 				email: emailRef.current.value!,
 				password: passwordRef.current.value
 			})
 		).unwrap();
+
+		console.log("in handleLogIn", res);
 	}
 
 	return (
